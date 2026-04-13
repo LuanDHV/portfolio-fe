@@ -1,6 +1,6 @@
 export default function ContactSection() {
   return (
-    <section className="relative min-h-screen border-t border-white/10 bg-black/20 py-24 sm:py-32">
+    <section className="relative min-h-screen py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.65fr]">
           <div className="space-y-6">
