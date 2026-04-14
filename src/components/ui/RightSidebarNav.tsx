@@ -1,0 +1,163 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+
+const sections = [
+  { id: "hero", label: "Hero", icon: ">" },
+  { id: "about", label: "About", icon: "A" },
+  { id: "tech", label: "Tech Stack", icon: "T" },
+  { id: "projects", label: "Projects", icon: "P" },
+  { id: "globe", label: "Globe", icon: "G" },
+  { id: "contact", label: "Contact", icon: "C" },
+];
+
+export default function RightSidebarNav() {
+  const [activeId, setActiveId] = useState("hero");
+  const frameRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const updateActive = () => {
+      const center = window.innerHeight / 2;
+      const visibleSections = sections
+        .map((section) => {
+          const element = document.getElementById(section.id);
+          if (!element) return null;
+          const rect = element.getBoundingClientRect();
+          return {
+            id: section.id,
+            distance: Math.abs(rect.top + rect.height / 2 - center),
+          };
+        })
+        .filter(Boolean) as { id: string; distance: number }[];
+
+      if (visibleSections.length > 0) {
+        const nearest = visibleSections.reduce(
+          (closest, current) =>
+            current.distance < closest.distance ? current : closest,
+          visibleSections[0],
+        );
+        setActiveId(nearest.id);
+      }
+    };
+
+    const handleScroll = () => {
+      if (frameRef.current !== null) return;
+      frameRef.current = window.requestAnimationFrame(() => {
+        updateActive();
+        frameRef.current = null;
+      });
+    };
+
+    updateActive();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
+    };
+  }, []);
+
+  const handleClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (!element) return;
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  return (
+    <>
+      <div className="fixed top-1/2 right-5 z-50 hidden -translate-y-1/2 lg:flex">
+        <div className="relative flex items-center justify-center">
+          <span className="absolute top-0 -left-6 h-6 w-6 rounded-full bg-white/10 blur-xl" />
+          <span className="absolute bottom-0 -left-6 h-6 w-6 rounded-full bg-white/10 blur-xl" />
+          <div className="relative flex flex-col items-center gap-8 px-3 py-4">
+            {sections.map((section, index) => {
+              const isActive = activeId === section.id;
+
+              return (
+                <motion.button
+                  key={section.id}
+                  type="button"
+                  onClick={() => handleClick(section.id)}
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 24 }}
+                  className="group relative flex cursor-pointer items-center justify-center"
+                  aria-label={`Go to ${section.label}`}
+                >
+                  <motion.span
+                    className={`flex h-6 w-6 items-center justify-center rounded-full transition-all duration-200 ${
+                      isActive
+                        ? "border border-white/20 bg-white/20 text-white shadow-[0_0_0_10px_rgba(255,255,255,0.08)]"
+                        : "border border-white/10 bg-white/5 opacity-70 hover:bg-white/10 hover:opacity-100"
+                    }`}
+                    animate={{
+                      scale: isActive ? 1.08 : 1,
+                      opacity: isActive ? 1 : 0.75,
+                    }}
+                    transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                  >
+                    <span
+                      className={`text-[10px] font-semibold ${isActive ? "text-white" : "text-transparent"}`}
+                    >
+                      {section.icon}
+                    </span>
+                  </motion.span>
+                  {index < sections.length - 1 ? (
+                    <motion.span
+                      className="absolute top-full left-1/2 h-8 w-px -translate-x-1/2 bg-white/15"
+                      animate={{
+                        opacity: isActive ? 0.95 : 0.35,
+                        height: isActive ? 40 : 28,
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 200,
+                        damping: 18,
+                      }}
+                    />
+                  ) : null}
+                  <span className="absolute right-full mr-3 hidden min-w-max rounded-full border border-white/10 bg-slate-950/95 px-3 py-1 text-xs text-white opacity-0 transition duration-200 group-hover:block group-hover:opacity-100">
+                    {section.label}
+                  </span>
+                </motion.button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div className="fixed inset-x-0 bottom-0 z-50 lg:hidden">
+        <div className="flex w-full items-center justify-between rounded-t-lg border-t border-white/10 bg-neutral-950/95 px-4 py-3 shadow-[0_-20px_80px_rgba(255,255,255,0.08)] backdrop-blur-xl">
+          {sections.map((section) => {
+            const isActive = activeId === section.id;
+            return (
+              <button
+                key={section.id}
+                type="button"
+                onClick={() => handleClick(section.id)}
+                className={`relative flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-white/10 transition-all duration-200 ${
+                  isActive
+                    ? "bg-white/10 text-white shadow-[0_10px_30px_rgba(255,255,255,0.12)]"
+                    : "bg-white/5 text-white/70 hover:scale-110 hover:bg-white/10"
+                }`}
+                aria-label={section.label}
+              >
+                {isActive ? (
+                  <span className="absolute inset-0 rounded-full bg-white/10" />
+                ) : null}
+                <span className="relative text-[10px] font-semibold tracking-[0.3em] text-white uppercase">
+                  {section.icon}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  );
+}

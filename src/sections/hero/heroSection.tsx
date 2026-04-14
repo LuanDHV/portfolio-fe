@@ -6,7 +6,10 @@ import HeroDetails from "@/src/components/ui/HeroDetails";
 
 export default function HeroSection() {
   return (
-    <section className="relative flex h-auto overflow-hidden py-10 lg:min-h-screen lg:items-center lg:py-0">
+    <section
+      id="hero"
+      className="relative flex h-auto overflow-hidden py-10 lg:min-h-screen lg:items-center lg:py-0"
+    >
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
         <div className="grid w-full gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <motion.div
