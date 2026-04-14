@@ -2,7 +2,6 @@ import HeroSection from "@/src/sections/hero/heroSection";
 import AboutSection from "@/src/sections/about/aboutSection";
 import TechStackSection from "@/src/sections/techStack/techStackSection";
 import ProjectsSection from "@/src/sections/projects/projectsSection";
-import GlobeSection from "@/src/sections/globe/globeSection";
 import ContactSection from "@/src/sections/contact/contactSection";
 import RightSidebarNav from "@/src/components/ui/RightSidebarNav";
 
@@ -15,7 +14,6 @@ export default function Home() {
         <AboutSection />
         <TechStackSection />
         <ProjectsSection />
-        <GlobeSection />
         <ContactSection />
       </main>
     </>

@@ -4,12 +4,97 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const sections = [
-  { id: "hero", label: "Hero", icon: ">" },
-  { id: "about", label: "About", icon: "A" },
-  { id: "tech", label: "Tech Stack", icon: "T" },
-  { id: "projects", label: "Projects", icon: "P" },
-  { id: "globe", label: "Globe", icon: "G" },
-  { id: "contact", label: "Contact", icon: "C" },
+  {
+    id: "hero",
+    label: "Hero",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M4 11.5L12 5l8 6.5" />
+        <path d="M5.5 10v8.5h5V14h2v4.5h5V10" />
+      </svg>
+    ),
+  },
+  {
+    id: "about",
+    label: "About",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="8" r="3.5" />
+        <path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" />
+      </svg>
+    ),
+  },
+  {
+    id: "tech",
+    label: "Tech Stack",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M8 6L2 12l6 6" />
+        <path d="M16 18l6-6-6-6" />
+        <path d="M14 4l-4 16" />
+      </svg>
+    ),
+  },
+  {
+    id: "projects",
+    label: "Projects",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M3 7h18v13H3V7Z" />
+        <path d="M3 7l3-3h4l3 3" />
+      </svg>
+    ),
+  },
+  {
+    id: "contact",
+    label: "Contact",
+    icon: (
+      <svg
+        width="16px"
+        height="16px"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6zm3.519 0L12 11.671 18.481 6H5.52zM20 7.329l-7.341 6.424a1 1 0 0 1-1.318 0L4 7.329V18h16V7.329z"
+          fill="#ffffff"
+        />
+      </svg>
+    ),
+  },
 ];
 
 export default function RightSidebarNav() {
@@ -74,7 +159,7 @@ export default function RightSidebarNav() {
         <div className="relative flex items-center justify-center">
           <span className="absolute top-0 -left-6 h-6 w-6 rounded-full bg-white/10 blur-xl" />
           <span className="absolute bottom-0 -left-6 h-6 w-6 rounded-full bg-white/10 blur-xl" />
-          <div className="relative flex flex-col items-center gap-8 px-3 py-4">
+          <div className="relative flex flex-col items-center gap-10 px-3 py-4">
             {sections.map((section, index) => {
               const isActive = activeId === section.id;
 
@@ -109,10 +194,10 @@ export default function RightSidebarNav() {
                   </motion.span>
                   {index < sections.length - 1 ? (
                     <motion.span
-                      className="absolute top-full left-1/2 h-8 w-px -translate-x-1/2 bg-white/15"
+                      className="absolute top-full left-1/2 h-12 w-px -translate-x-1/2 bg-white/15"
                       animate={{
-                        opacity: isActive ? 0.95 : 0.35,
-                        height: isActive ? 40 : 28,
+                        opacity: 0.95,
+                        height: 40,
                       }}
                       transition={{
                         type: "spring",
@@ -121,7 +206,7 @@ export default function RightSidebarNav() {
                       }}
                     />
                   ) : null}
-                  <span className="absolute right-full mr-3 hidden min-w-max rounded-full border border-white/10 bg-slate-950/95 px-3 py-1 text-xs text-white opacity-0 transition duration-200 group-hover:block group-hover:opacity-100">
+                  <span className="absolute right-full mr-3 hidden min-w-max rounded-full border border-white/10 bg-black/70 px-3 py-1 text-xs text-white opacity-0 shadow-xl transition duration-200 group-hover:block group-hover:opacity-100">
                     {section.label}
                   </span>
                 </motion.button>
@@ -150,7 +235,7 @@ export default function RightSidebarNav() {
                 {isActive ? (
                   <span className="absolute inset-0 rounded-full bg-white/10" />
                 ) : null}
-                <span className="relative text-[10px] font-semibold tracking-[0.3em] text-white uppercase">
+                <span className="relative text-[10px] font-semibold text-white uppercase">
                   {section.icon}
                 </span>
               </button>

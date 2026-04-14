@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { SUSE_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 import SpaceBackground from "@/src/components/ui/SpaceBackground";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const suseMono = SUSE_Mono({
+  variable: "--font-suse-mono",
   subsets: ["latin"],
 });
 
@@ -25,10 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${suseMono.variable} h-full antialiased`}>
       <body className="relative flex min-h-full flex-col overflow-x-hidden">
         <SpaceBackground />
         <div className="relative z-10 flex-1">
