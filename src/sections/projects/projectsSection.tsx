@@ -1,3 +1,9 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 const projects = [
   {
     name: "Orbit Dashboard",
@@ -42,6 +48,37 @@ const projects = [
 ];
 
 export default function ProjectsSection() {
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+
+    cards.forEach((card) => {
+      const alignRight = card.dataset.alignRight === "true";
+      gsap.set(card, { x: alignRight ? 140 : -140, autoAlpha: 0 });
+      gsap.to(card, {
+        x: 0,
+        autoAlpha: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 90%",
+          end: "bottom 45%",
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
   return (
     <section id="projects" className="relative min-h-screen py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
@@ -67,6 +104,10 @@ export default function ProjectsSection() {
               return (
                 <div
                   key={project.name}
+                  ref={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
+                  data-align-right={alignRight}
                   className={`relative md:grid md:grid-cols-2 md:items-center ${
                     alignRight ? "md:grid-flow-dense" : ""
                   }`}

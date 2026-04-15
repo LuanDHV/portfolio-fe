@@ -7,3 +7,8 @@ body {
     var(--font-suse-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
+::selection {
+  background: #000000;
+  color: #ffffff;
+}

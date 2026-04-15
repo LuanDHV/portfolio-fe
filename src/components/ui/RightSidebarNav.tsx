@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 
 const sections = [
   {
@@ -90,7 +89,7 @@ const sections = [
       >
         <path
           d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6zm3.519 0L12 11.671 18.481 6H5.52zM20 7.329l-7.341 6.424a1 1 0 0 1-1.318 0L4 7.329V18h16V7.329z"
-          fill="#ffffff"
+          fill="currentColor"
         />
       </svg>
     ),
@@ -164,52 +163,33 @@ export default function RightSidebarNav() {
               const isActive = activeId === section.id;
 
               return (
-                <motion.button
+                <button
                   key={section.id}
                   type="button"
                   onClick={() => handleClick(section.id)}
-                  whileHover={{ scale: 1.08 }}
-                  whileTap={{ scale: 0.96 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 24 }}
                   className="group relative flex cursor-pointer items-center justify-center"
                   aria-label={`Go to ${section.label}`}
                 >
-                  <motion.span
+                  <span
                     className={`flex h-6 w-6 items-center justify-center rounded-full transition-all duration-200 ${
                       isActive
                         ? "border border-white/20 bg-white/20 text-white shadow-[0_0_0_10px_rgba(255,255,255,0.08)]"
-                        : "border border-white/10 bg-white/5 opacity-70 hover:bg-white/10 hover:opacity-100"
+                        : "border border-white/10 bg-white/5 opacity-70 hover:scale-110 hover:bg-white/10 hover:opacity-100"
                     }`}
-                    animate={{
-                      scale: isActive ? 1.08 : 1,
-                      opacity: isActive ? 1 : 0.75,
-                    }}
-                    transition={{ type: "spring", stiffness: 220, damping: 20 }}
                   >
                     <span
                       className={`text-[10px] font-semibold ${isActive ? "text-white" : "text-transparent"}`}
                     >
                       {section.icon}
                     </span>
-                  </motion.span>
+                  </span>
                   {index < sections.length - 1 ? (
-                    <motion.span
-                      className="absolute top-full left-1/2 h-12 w-px -translate-x-1/2 bg-white/15"
-                      animate={{
-                        opacity: 0.95,
-                        height: 40,
-                      }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 200,
-                        damping: 18,
-                      }}
-                    />
+                    <span className="absolute top-full left-1/2 h-10 w-px -translate-x-1/2 bg-white/15" />
                   ) : null}
                   <span className="absolute right-full mr-3 hidden min-w-max rounded-full border border-white/10 bg-black/70 px-3 py-1 text-xs text-white opacity-0 shadow-xl transition duration-200 group-hover:block group-hover:opacity-100">
                     {section.label}
                   </span>
-                </motion.button>
+                </button>
               );
             })}
           </div>

@@ -1,4 +1,26 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 export default function ContactSection() {
+  const emailAddress = "luandhv1406@gmail.com";
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (!copied) return;
+    const timeout = window.setTimeout(() => setCopied(false), 2000);
+    return () => window.clearTimeout(timeout);
+  }, [copied]);
+
+  const handleEmailClick = async () => {
+    try {
+      await navigator.clipboard.writeText(emailAddress);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+  };
+
   return (
     <section id="contact" className="relative min-h-screen py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
@@ -21,9 +43,10 @@ export default function ContactSection() {
             </div>
 
             <div className="grid gap-4">
-              <a
-                href="mailto:luandhv1406@gmail.com"
-                className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/5 px-5 py-4 text-sm text-white transition hover:bg-white/10"
+              <button
+                type="button"
+                onClick={handleEmailClick}
+                className="flex cursor-pointer items-center gap-4 rounded-lg border border-white/10 bg-white/10 px-5 py-4 text-left text-sm text-white transition hover:bg-white/20"
               >
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white">
                   <svg
@@ -42,10 +65,15 @@ export default function ContactSection() {
                 <div>
                   <p className="text-xs text-neutral-400 uppercase">Email</p>
                   <p className="mt-1 font-semibold text-white">
-                    luandhv1406@gmail.com
+                    {emailAddress}
                   </p>
                 </div>
-              </a>
+              </button>
+              {copied ? (
+                <div className="rounded-full border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-black shadow-lg shadow-black/10">
+                  Copied to clipboard!
+                </div>
+              ) : null}
               <a
                 href="https://github.com/LuanDHV"
                 target="_blank"

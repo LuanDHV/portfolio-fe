@@ -1,13 +1,9 @@
 import type { PointerEvent } from "react";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { useRef } from "react";
+import gsap from "gsap";
 
 export default function CodePortal() {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateY = useTransform(x, [-50, 50], [10, -10]);
-  const rotateX = useTransform(y, [-50, 50], [-10, 10]);
-  const translateX = useTransform(x, [-50, 50], [8, -8]);
-  const translateY = useTransform(y, [-50, 50], [8, -8]);
+  const portalRef = useRef<HTMLDivElement | null>(null);
 
   const lines = [
     { number: "01", code: "const developer = {" },
@@ -27,30 +23,44 @@ export default function CodePortal() {
     const px = (event.clientX - rect.left) / rect.width;
     const py = (event.clientY - rect.top) / rect.height;
 
-    x.set((px - 0.5) * 100);
-    y.set((py - 0.5) * 100);
+    const x = (px - 0.5) * 10;
+    const y = (py - 0.5) * 10;
+    const rotateY = (px - 0.5) * 10;
+    const rotateX = (py - 0.5) * -10;
+
+    if (portalRef.current) {
+      gsap.to(portalRef.current, {
+        x,
+        y,
+        rotateX,
+        rotateY,
+        ease: "power2.out",
+        duration: 0.25,
+      });
+    }
   };
 
   const handlePointerLeave = () => {
-    x.set(0);
-    y.set(0);
+    if (portalRef.current) {
+      gsap.to(portalRef.current, {
+        x: 0,
+        y: 0,
+        rotateX: 0,
+        rotateY: 0,
+        ease: "power2.out",
+        duration: 0.4,
+      });
+    }
   };
 
   return (
     <div className="relative min-w-0" style={{ perspective: 1200 }}>
-      <motion.div
+      <div
+        ref={portalRef}
         onPointerMove={handlePointerMove}
         onPointerLeave={handlePointerLeave}
-        whileHover={{ scale: 1.01 }}
-        transition={{ type: "spring", stiffness: 90, damping: 24 }}
-        style={{
-          rotateX,
-          rotateY,
-          x: translateX,
-          y: translateY,
-          transformStyle: "preserve-3d",
-        }}
         className="overflow-hidden rounded-lg border border-white/10 bg-neutral-950/95 shadow-[0_40px_120px_-40px_rgba(15,23,42,0.65)]"
+        style={{ transformStyle: "preserve-3d" }}
       >
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-neutral-900/95 px-5 py-3 text-xs text-neutral-400 uppercase">
           <div className="flex items-center gap-2">
@@ -77,7 +87,7 @@ export default function CodePortal() {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
