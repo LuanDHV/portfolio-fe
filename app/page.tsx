@@ -1,5 +1,5 @@
 import HeroSection from "@/src/sections/hero/heroSection";
-import AboutSection from "@/src/sections/about/aboutSection";
+import ExperienceSection from "@/src/sections/experience/experienceSection";
 import TechStackSection from "@/src/sections/techStack/techStackSection";
 import ProjectsSection from "@/src/sections/projects/projectsSection";
 import ContactSection from "@/src/sections/contact/contactSection";
@@ -11,8 +11,8 @@ export default function Home() {
       <RightSidebarNav />
       <main className="relative overflow-x-hidden">
         <HeroSection />
-        <AboutSection />
         <TechStackSection />
+        <ExperienceSection />
         <ProjectsSection />
         <ContactSection />
       </main>

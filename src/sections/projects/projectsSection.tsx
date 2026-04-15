@@ -1,49 +1,75 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const projects = [
   {
-    name: "Orbit Dashboard",
-    role: "Realtime analytics",
-    date: "2024 — Present",
+    name: "ParaVibe",
+    role: "Personalized music recommendation website",
+    date: "Nov 2025 - Feb 2026",
     github: "#",
     demo: "#",
+    image: "/imgs/paravibe.jpg",
     summary:
-      "A performance-first dashboard with live visualizations, multi-region metrics, and clean operational flows.",
-    tags: ["Next.js", "Prisma", "Supabase"],
+      "Fullstack music streaming platform with AI-based recommendations using audio and metadata embeddings (MERT, SBERT).",
+    tags: ["Next.js", "NestJS", "FastAPI", "Python", "MySQL", "Docker"],
   },
   {
-    name: "Nova Commerce",
-    role: "Commerce platform",
-    date: "2023 — 2024",
+    name: "Riot Games Clone",
+    role: "Fullstack web application",
+    date: "Oct 2024 - May 2025",
     github: "#",
     demo: "#",
+    image: "/imgs/riot.jpg",
     summary:
-      "A fast headless storefront built for conversion, mobile-first checkout, and server-side search optimization.",
-    tags: ["React", "Stripe", "Headless CMS"],
+      "Replica of Riot Games platform with multi-game pages, responsive UI, and immersive product flows.",
+    tags: [
+      "TypeScript",
+      "Tailwind CSS",
+      "Next.js",
+      "NestJS",
+      "Prisma",
+      "PostgreSQL",
+    ],
   },
   {
-    name: "Photon Portfolio",
-    role: "Brand experience",
-    date: "2022 — 2023",
+    name: "E-Learning Prep Clone",
+    role: "Language learning platform",
+    date: "Jun 2024 - Sep 2024",
     github: "#",
     demo: "#",
+    image: "/imgs/prep.jpg",
     summary:
-      "A polished creator portfolio with motion-led storytelling, accessibility, and SEO-ready landing sections.",
-    tags: ["Tailwind", "SEO", "Design"],
+      "Personalized learning flows and content management features for a web-based language learning experience.",
+    tags: [
+      "TypeScript",
+      "Tailwind CSS",
+      "Next.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+    ],
   },
   {
-    name: "Luna CRM",
-    role: "Workflow system",
-    date: "2021 — 2022",
+    name: "E-Commerce Website",
+    role: "Fullstack storefront",
+    date: "Dec 2023 - Apr 2024",
     github: "#",
     demo: "#",
+    image: "/imgs/ecommerce.jpg",
     summary:
-      "A lightweight CRM with real-time collaboration, API integrations, and clean customer management interfaces.",
-    tags: ["Node.js", "API", "Dashboard"],
+      "Fullstack eCommerce solution with product management, order handling, and admin dashboard workflows.",
+    tags: [
+      "Tailwind CSS",
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "Redux Toolkit",
+      "MongoDB",
+    ],
   },
 ];
 
@@ -63,12 +89,12 @@ export default function ProjectsSection() {
       gsap.to(card, {
         x: 0,
         autoAlpha: 1,
-        ease: "none",
+        ease: "power3.out",
         scrollTrigger: {
           trigger: card,
           start: "top 90%",
-          end: "bottom 45%",
-          scrub: 1,
+          end: "top 40%",
+          scrub: 0.8,
           invalidateOnRefresh: true,
         },
       });
@@ -83,21 +109,20 @@ export default function ProjectsSection() {
     <section id="projects" className="relative min-h-screen py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-3xl space-y-6">
-          <span className="inline-flex rounded-full border border-neutral-700 bg-neutral-950/70 px-5 py-2 text-xs text-neutral-400 uppercase shadow-sm">
+          <span className="inline-flex rounded-lg border border-neutral-700 bg-neutral-950/70 px-5 py-2 text-xs text-neutral-400 uppercase shadow-sm">
             Projects
           </span>
           <h2 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-            Selected work in a timeline layout.
+            Real projects and technical experiments.
           </h2>
           <p className="text-lg leading-8 text-neutral-300">
-            Mock projects shown like a connected timeline, with alternating
-            cards left and right to echo the right-side nav style.
+            Selected fullstack and frontend work, including AI-backed streaming,
+            platform clones, e-learning products, and commerce systems.
           </p>
         </div>
 
         <div className="relative mt-20 px-4 sm:px-0">
           <div className="absolute top-0 left-1/2 hidden h-full w-px -translate-x-1/2 bg-white/10 md:block" />
-
           <div className="space-y-10">
             {projects.map((project, index) => {
               const alignRight = index % 2 === 1;
@@ -117,7 +142,7 @@ export default function ProjectsSection() {
                       alignRight ? "left-1/2 w-28" : "right-1/2 w-28"
                     }`}
                   />
-                  <span className="absolute top-1/2 left-1/2 hidden h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/15 ring-2 ring-white/10 md:block" />
+                  <span className="absolute top-1/2 left-1/2 hidden h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white/15 ring-2 ring-white/10 md:block" />
                   <span
                     className={`absolute top-1/2 hidden -translate-y-1/2 items-center gap-2 md:z-20 md:flex ${
                       alignRight ? "right-1/2 mr-8" : "left-1/2 ml-8"
@@ -125,13 +150,13 @@ export default function ProjectsSection() {
                   >
                     {alignRight ? (
                       <>
-                        <span className="rounded-full border border-white/10 bg-neutral-950/95 px-3 py-1 text-xs text-neutral-300 uppercase">
+                        <span className="rounded-lg border border-white/10 bg-neutral-950/95 px-3 py-1 text-xs text-neutral-300 uppercase">
                           {project.date}
                         </span>
                       </>
                     ) : (
                       <>
-                        <span className="rounded-full border border-white/10 bg-neutral-950/95 px-3 py-1 text-xs text-neutral-300 uppercase">
+                        <span className="rounded-lg border border-white/10 bg-neutral-950/95 px-3 py-1 text-xs text-neutral-300 uppercase">
                           {project.date}
                         </span>
                       </>
@@ -148,6 +173,16 @@ export default function ProjectsSection() {
                         alignRight ? "md:ml-auto" : "md:mr-auto"
                       } max-w-xl`}
                     >
+                      {project.image ? (
+                        <div className="relative mb-6 h-48 overflow-hidden rounded-lg bg-black/20">
+                          <Image
+                            src={project.image}
+                            alt={`${project.name} screenshot`}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : null}
                       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-white/10 via-transparent to-transparent" />
                       <h3 className="mt-5 text-3xl font-semibold text-white">
                         {project.name}
@@ -160,7 +195,7 @@ export default function ProjectsSection() {
                         {project.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="rounded-full border border-white/10 bg-white/5 px-3 py-2"
+                            className="rounded-lg border border-white/10 bg-white/5 px-3 py-2"
                           >
                             {tag}
                           </span>
@@ -171,7 +206,7 @@ export default function ProjectsSection() {
                           href={project.github}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white uppercase transition hover:bg-white/10"
+                          className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white uppercase transition hover:bg-white/10"
                         >
                           <svg
                             viewBox="0 0 24 24"
@@ -191,7 +226,7 @@ export default function ProjectsSection() {
                           href={project.demo}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white uppercase transition hover:bg-white/10"
+                          className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white uppercase transition hover:bg-white/10"
                         >
                           <svg
                             viewBox="0 0 24 24"

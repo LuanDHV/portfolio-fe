@@ -1,10 +1,49 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function ContactSection() {
   const emailAddress = "luandhv1406@gmail.com";
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const sections = gsap.utils.toArray<HTMLElement>(".contact-reveal");
+      gsap.set(sections, { autoAlpha: 0, y: 40 });
+
+      sections.forEach((section, index) => {
+        const xDirection = index === 0 ? -80 : 80;
+        gsap.fromTo(
+          section,
+          { autoAlpha: 0, y: 40, x: xDirection },
+          {
+            autoAlpha: 1,
+            y: 0,
+            x: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.4,
+              toggleActions: "play reverse play reverse",
+              invalidateOnRefresh: true,
+            },
+          },
+        );
+      });
+    });
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
 
   useEffect(() => {
     if (!copied) return;
@@ -25,7 +64,7 @@ export default function ContactSection() {
     <section id="contact" className="relative min-h-screen py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="max-w-xl space-y-8">
+          <div className="contact-reveal max-w-xl space-y-8">
             <span className="inline-flex rounded-full border border-neutral-700 bg-neutral-950/70 px-5 py-2 text-xs text-neutral-400 uppercase shadow-sm">
               Contact
             </span>
@@ -78,7 +117,7 @@ export default function ContactSection() {
                 href="https://github.com/LuanDHV"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/5 px-5 py-4 text-sm text-white transition hover:bg-white/10"
+                className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/10 px-5 py-4 text-sm text-white transition hover:bg-white/10"
               >
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white">
                   <svg
@@ -108,7 +147,7 @@ export default function ContactSection() {
                 href="https://www.linkedin.com/in/luandhv/"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/5 px-5 py-4 text-sm text-white transition hover:bg-white/10"
+                className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/10 px-5 py-4 text-sm text-white transition hover:bg-white/10"
               >
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white">
                   <svg
@@ -133,7 +172,7 @@ export default function ContactSection() {
             </div>
           </div>
 
-          <div className="self-start rounded-lg border border-white/10 bg-neutral-950/80 p-8 shadow-[0_30px_90px_rgba(0,0,0,0.28)]">
+          <div className="contact-reveal self-start rounded-lg border border-white/10 bg-neutral-950/80 p-8 shadow-[0_30px_90px_rgba(0,0,0,0.28)]">
             <div className="space-y-6">
               <div className="space-y-3">
                 <p className="text-xs text-neutral-400 uppercase">

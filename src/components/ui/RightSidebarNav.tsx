@@ -21,24 +21,7 @@ const sections = [
       </svg>
     ),
   },
-  {
-    id: "about",
-    label: "About",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="h-4 w-4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="12" cy="8" r="3.5" />
-        <path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" />
-      </svg>
-    ),
-  },
+
   {
     id: "tech",
     label: "Tech Stack",
@@ -55,6 +38,24 @@ const sections = [
         <path d="M8 6L2 12l6 6" />
         <path d="M16 18l6-6-6-6" />
         <path d="M14 4l-4 16" />
+      </svg>
+    ),
+  },
+  {
+    id: "experience",
+    label: "Experience",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="8" r="3.5" />
+        <path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" />
       </svg>
     ),
   },
