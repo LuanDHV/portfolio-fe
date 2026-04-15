@@ -113,11 +113,11 @@ export default function ProjectsSection() {
             Projects
           </span>
           <h2 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-            Real projects and technical experiments.
+            Personal projects and technical prototypes.
           </h2>
           <p className="text-lg leading-8 text-neutral-300">
-            Selected fullstack and frontend work, including AI-backed streaming,
-            platform clones, e-learning products, and commerce systems.
+            A collection of self-driven work built to showcase product thinking,
+            engineering skills, and experimentation with modern web stacks.
           </p>
         </div>
 

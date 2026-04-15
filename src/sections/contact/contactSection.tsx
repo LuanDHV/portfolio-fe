@@ -77,11 +77,9 @@ export default function ContactSection() {
                 Let&apos;s build something together.
               </h2>
               <p className="text-lg leading-8 text-neutral-300">
-                I&apos;m always interested in discussing challenging backend
-                engineering problems, consulting opportunities, or full-time
-                roles. Whether you need to scale your infrastructure or
-                architect a new system from scratch, I&apos;d love to hear from
-                you.
+                I&apos;m open to new challenges across web development, product
+                delivery, and technical collaboration. If you have a project,
+                idea, or opportunity to discuss, I&apos;d love to hear from you.
               </p>
             </div>
 

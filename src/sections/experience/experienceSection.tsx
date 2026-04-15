@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -150,12 +151,13 @@ export default function ExperienceSection() {
             Work Experience
           </span>
           <h2 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-            Frontend and fullstack development for sports platforms.
+            Professional experience in fullstack and user-focused systems.
           </h2>
           <p className="text-lg leading-8 text-neutral-300">
-            I build scalable and user-focused applications with a strong focus
-            on performance, SEO, and polished UX. My experience spans Next.js
-            SSR products, backend services, and live event operations.
+            I work on scalable frontend and backend systems with a focus on
+            performance, maintainability, and practical delivery. The work
+            includes production-oriented applications, admin tools, and live
+            operations support.
           </p>
         </div>
 
@@ -238,9 +240,7 @@ export default function ExperienceSection() {
                           <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white">
                             <svg
                               viewBox="0 0 24 24"
-                              className={`h-4 w-4 transition-transform duration-200 ${
-                                isOpen ? "rotate-180" : ""
-                              }`}
+                              className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
                               fill="none"
                               stroke="currentColor"
                               strokeWidth="2"

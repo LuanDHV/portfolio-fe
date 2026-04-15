@@ -6,16 +6,21 @@ export default function CodePortal() {
   const portalRef = useRef<HTMLDivElement | null>(null);
 
   const lines = [
-    { number: "01", code: "const developer = {" },
-    { number: "02", code: "  role: 'Fullstack Developer'," },
+    { number: "01", code: "const Fullstack Developer = {" },
     {
-      number: "03",
-      code: "  frontend: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS'],",
+      number: "02",
+      code: "  frontend: 'TypeScript, React, Next.js , Tailwind CSS, Redux Toolkit, RTK Query',",
     },
-    { number: "04", code: "  backend: ['Node.js', 'NestJS']," },
-    { number: "05", code: "  database: ['MySQL', 'PostgreSQL', 'MongoDB']," },
-    { number: "06", code: "  tools: ['Git', 'Docker', 'Figma', 'Jira']," },
-    { number: "07", code: "};" },
+    { number: "03", code: "  backend: 'Node.js, NestJS, RESTful APIs'," },
+    {
+      number: "04",
+      code: "  database: 'MySQL, PostgreSQL, MongoDB',",
+    },
+    {
+      number: "05",
+      code: "  workflow: 'Git, GitLab CI/CD, Docker, Figma, Jira, Postman, Agile/Scrum, ArgoCD',",
+    },
+    { number: "06", code: "};" },
   ];
 
   const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {

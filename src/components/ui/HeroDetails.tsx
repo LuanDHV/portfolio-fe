@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 const heroDescription =
-  "Experienced in building Next.js (SSR) applications for sports platforms and live events. Focused on performance, SEO, and user experience, with hands-on experience in backend services and data pipelines. Seeking a Frontend or Fullstack Developer position to build scalable and user-focused applications.";
+  "Experienced in building modern web applications with a strong focus on performance, accessibility, and polished user experiences. Interested in working across frontend and backend layers to deliver solutions that scale. Seeking opportunities.";
 
 export default function HeroDetails() {
   const descriptionRef = useRef<HTMLParagraphElement | null>(null);
@@ -63,6 +63,15 @@ export default function HeroDetails() {
       <div className="grid max-w-md gap-4 sm:grid-cols-[1.2fr_0.8fr]">
         <button
           type="button"
+          onClick={() => {
+            const contactSection = document.getElementById("contact");
+            if (contactSection) {
+              contactSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          }}
           className="inline-flex cursor-pointer items-center justify-center rounded-lg border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
         >
           Let&apos;s Collaborate
