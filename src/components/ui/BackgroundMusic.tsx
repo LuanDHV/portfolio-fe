@@ -32,9 +32,15 @@ export default function BackgroundMusic() {
       }
     };
 
-    window.addEventListener("backgroundMusicToggle", handleToggle as EventListener);
+    window.addEventListener(
+      "backgroundMusicToggle",
+      handleToggle as EventListener,
+    );
     return () => {
-      window.removeEventListener("backgroundMusicToggle", handleToggle as EventListener);
+      window.removeEventListener(
+        "backgroundMusicToggle",
+        handleToggle as EventListener,
+      );
     };
   }, []);
 
