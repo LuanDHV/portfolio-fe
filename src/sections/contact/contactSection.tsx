@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Footer from "@/src/components/ui/Footer";
 
 export default function ContactSection() {
   const emailAddress = "luandhv1406@gmail.com";
@@ -61,8 +62,11 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative min-h-screen py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6">
+    <section
+      id="contact"
+      className="relative flex h-auto flex-col py-12 lg:min-h-screen"
+    >
+      <div className="mx-auto max-w-7xl flex-1 px-6">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="contact-reveal max-w-xl space-y-8">
             <span className="inline-flex rounded-full border border-neutral-700 bg-neutral-950/70 px-5 py-2 text-xs text-neutral-400 uppercase shadow-sm">
@@ -250,6 +254,7 @@ export default function ContactSection() {
           </div>
         </div>
       </div>
+      <Footer />
     </section>
   );
 }

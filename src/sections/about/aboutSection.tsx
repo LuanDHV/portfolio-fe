@@ -92,7 +92,7 @@ export default function ExperienceSection() {
   };
 
   return (
-    <section id="experience" className="relative min-h-screen py-24 sm:py-32">
+    <section id="experience" className="relative h-auto py-12 lg:min-h-screen">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-3xl space-y-6">
           <span className="inline-flex rounded-full border border-neutral-700 bg-neutral-950/70 px-5 py-2 text-xs text-neutral-400 uppercase shadow-sm">
