@@ -99,10 +99,7 @@ const sections = [
 
 export default function RightSidebarNav() {
   const [activeId, setActiveId] = useState("hero");
-  const [musicOn, setMusicOn] = useState(() => {
-    if (typeof window === "undefined") return true;
-    return window.localStorage.getItem("bgMusicOn") !== "0";
-  });
+  const [musicOn, setMusicOn] = useState(true);
   const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -160,7 +157,6 @@ export default function RightSidebarNav() {
   const handleMusicToggle = () => {
     const next = !musicOn;
     setMusicOn(next);
-    window.localStorage.setItem("bgMusicOn", next ? "1" : "0");
     window.dispatchEvent(
       new CustomEvent("backgroundMusicToggle", {
         detail: { isPlaying: next },
