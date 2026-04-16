@@ -80,7 +80,6 @@ const sections = [
 
 export default function RightSidebarNav() {
   const [activeId, setActiveId] = useState("hero");
-  const [musicOn, setMusicOn] = useState(true);
   const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -135,16 +134,6 @@ export default function RightSidebarNav() {
     element.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const handleMusicToggle = () => {
-    const next = !musicOn;
-    setMusicOn(next);
-    window.dispatchEvent(
-      new CustomEvent("backgroundMusicToggle", {
-        detail: { isPlaying: next },
-      }),
-    );
-  };
-
   return (
     <>
       <div className="fixed top-1/2 right-5 z-50 hidden -translate-y-1/2 lg:flex">
@@ -185,47 +174,6 @@ export default function RightSidebarNav() {
                 </button>
               );
             })}
-            <button
-              type="button"
-              onClick={handleMusicToggle}
-              className={`group relative flex cursor-pointer items-center justify-center ${
-                musicOn
-                  ? "border border-white/20 bg-white/20 text-white shadow-[0_0_0_10px_rgba(255,255,255,0.08)]"
-                  : "border border-white/10 bg-white/5 opacity-70 hover:scale-110 hover:bg-white/10 hover:opacity-100"
-              } h-6 w-6 rounded-full transition-all duration-200`}
-              aria-label={
-                musicOn ? "Pause background music" : "Play background music"
-              }
-            >
-              <span className="relative text-[10px] font-semibold text-white">
-                {musicOn ? (
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <rect x="6" y="4" width="4" height="16" />
-                    <rect x="14" y="4" width="4" height="16" />
-                  </svg>
-                ) : (
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                )}
-              </span>
-            </button>
           </div>
         </div>
       </div>
@@ -255,50 +203,6 @@ export default function RightSidebarNav() {
               </button>
             );
           })}
-          <button
-            type="button"
-            onClick={handleMusicToggle}
-            className={`relative flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-white/10 transition-all duration-200 ${
-              musicOn
-                ? "bg-white/10 text-white shadow-[0_10px_30px_rgba(255,255,255,0.12)]"
-                : "bg-white/5 text-white/70 hover:scale-110 hover:bg-white/10"
-            }`}
-            aria-label={
-              musicOn ? "Pause background music" : "Play background music"
-            }
-          >
-            {musicOn ? (
-              <span className="absolute inset-0 rounded-full bg-white/10" />
-            ) : null}
-            <span className="relative text-[10px] font-semibold text-white uppercase">
-              {musicOn ? (
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="6" y="4" width="4" height="16" />
-                  <rect x="14" y="4" width="4" height="16" />
-                </svg>
-              ) : (
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              )}
-            </span>
-          </button>
         </div>
       </div>
     </>

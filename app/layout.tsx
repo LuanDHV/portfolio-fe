@@ -4,7 +4,6 @@ import "./globals.css";
 import Providers from "./providers";
 import SpaceBackground from "@/src/components/ui/SpaceBackground";
 import CursorEffect from "@/src/components/ui/CursorEffect";
-import BackgroundMusic from "@/src/components/ui/BackgroundMusic";
 
 const suseMono = SUSE_Mono({
   variable: "--font-suse-mono",
@@ -34,7 +33,6 @@ export default function RootLayout({
         <div className="relative z-10 flex-1">
           <Providers>{children}</Providers>
         </div>
-        <BackgroundMusic />
       </body>
     </html>
   );
