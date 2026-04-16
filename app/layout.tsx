@@ -16,9 +16,8 @@ export const metadata: Metadata = {
   description:
     "A personal portfolio showcasing projects, experience, and skills.",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
   },
 };
 
