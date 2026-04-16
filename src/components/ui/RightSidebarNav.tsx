@@ -179,7 +179,7 @@ export default function RightSidebarNav() {
       </div>
 
       <div className="fixed inset-x-0 bottom-0 z-50 lg:hidden">
-        <div className="flex w-full items-center justify-between rounded-t-lg border-t border-white/10 bg-neutral-950/95 px-4 py-3 shadow-[0_-20px_80px_rgba(255,255,255,0.08)] backdrop-blur-xl">
+        <div className="flex h-[8vh] min-h-[50px] w-full items-center justify-between rounded-t-lg border-t border-white/10 bg-neutral-950/60 px-4 py-2 shadow-[0_-20px_80px_rgba(255,255,255,0.05)] backdrop-blur-xl">
           {sections.map((section) => {
             const isActive = activeId === section.id;
             return (
@@ -187,7 +187,7 @@ export default function RightSidebarNav() {
                 key={section.id}
                 type="button"
                 onClick={() => handleClick(section.id)}
-                className={`relative flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-white/10 transition-all duration-200 ${
+                className={`relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/10 transition-all duration-200 ${
                   isActive
                     ? "bg-white/10 text-white shadow-[0_10px_30px_rgba(255,255,255,0.12)]"
                     : "bg-white/5 text-white/70 hover:scale-110 hover:bg-white/10"
@@ -197,7 +197,7 @@ export default function RightSidebarNav() {
                 {isActive ? (
                   <span className="absolute inset-0 rounded-full bg-white/10" />
                 ) : null}
-                <span className="relative text-[10px] font-semibold text-white uppercase">
+                <span className="relative text-[9px] font-semibold text-white uppercase">
                   {section.icon}
                 </span>
               </button>
