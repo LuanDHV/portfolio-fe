@@ -3,12 +3,38 @@
 import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import emailjs from "@emailjs/browser";
 import Footer from "@/src/components/ui/Footer";
 
 export default function ContactSection() {
   const emailAddress = "luandhv1406@gmail.com";
   const [copied, setCopied] = useState(false);
 
+  // Form state
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
+  // Initialize EmailJS
+  useEffect(() => {
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init(publicKey);
+    } else {
+      console.warn(
+        "EmailJS public key not configured. Please set NEXT_PUBLIC_EMAILJS_PUBLIC_KEY in .env.local",
+      );
+    }
+  }, []);
+
+  // GSAP animation effect
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -46,18 +72,80 @@ export default function ContactSection() {
     };
   }, []);
 
-  useEffect(() => {
-    if (!copied) return;
-    const timeout = window.setTimeout(() => setCopied(false), 2000);
-    return () => window.clearTimeout(timeout);
-  }, [copied]);
-
   const handleEmailClick = async () => {
     try {
       await navigator.clipboard.writeText(emailAddress);
       setCopied(true);
     } catch {
       setCopied(false);
+    }
+  };
+
+  const handleCopiedDismiss = () => {
+    setCopied(false);
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setSubmitStatus("idle");
+
+    // Validate form
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.message.trim()
+    ) {
+      setSubmitStatus("error");
+      setIsLoading(false);
+      return;
+    }
+
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+
+    if (!serviceId || !templateId) {
+      console.error("EmailJS configuration is missing");
+      setSubmitStatus("error");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const now = new Date();
+      const formattedTime = now.toLocaleString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      });
+
+      await emailjs.send(serviceId, templateId, {
+        to_email: emailAddress,
+        name: formData.name,
+        email: formData.email,
+        subject_line: formData.subject || "Portfolio Contact",
+        message: formData.message,
+        time: formattedTime,
+        reply_to: formData.email,
+      });
+
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -111,8 +199,18 @@ export default function ContactSection() {
                 </div>
               </button>
               {copied ? (
-                <div className="rounded-full border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-black shadow-lg shadow-black/10">
-                  Copied to clipboard!
+                <div className="flex items-center justify-between gap-3 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black shadow-lg shadow-black/10">
+                  <span className="whitespace-nowrap">
+                    Copied to clipboard!
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleCopiedDismiss}
+                    className="text-black/50 hover:text-black"
+                    aria-label="Dismiss"
+                  >
+                    ✕
+                  </button>
                 </div>
               ) : null}
               <a
@@ -174,7 +272,7 @@ export default function ContactSection() {
             </div>
           </div>
 
-          <div className="contact-reveal self-start rounded-lg border border-white/10 bg-neutral-950/80 p-8 shadow-[0_30px_90px_rgba(0,0,0,0.28)]">
+          <div className="contact-reveal self-end rounded-lg border border-white/10 bg-neutral-950/80 p-8 shadow-[0_30px_90px_rgba(0,0,0,0.28)]">
             <div className="space-y-6">
               <div className="space-y-3">
                 <p className="text-xs text-neutral-400 uppercase">
@@ -185,22 +283,30 @@ export default function ContactSection() {
                 </h3>
               </div>
 
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <label className="space-y-2 text-xs text-neutral-400 uppercase">
                     Name
                     <input
                       type="text"
+                      name="name"
                       placeholder="Your name"
-                      className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-xs text-white transition outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      disabled={isLoading}
+                      className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-xs text-white transition outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10 disabled:opacity-50"
                     />
                   </label>
                   <label className="space-y-2 text-xs text-neutral-400 uppercase">
                     Email
                     <input
                       type="email"
+                      name="email"
                       placeholder="your@email.com"
-                      className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-xs text-white transition outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      disabled={isLoading}
+                      className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-xs text-white transition outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10 disabled:opacity-50"
                     />
                   </label>
                 </div>
@@ -209,8 +315,12 @@ export default function ContactSection() {
                   Subject
                   <input
                     type="text"
+                    name="subject"
                     placeholder="Project inquiry / Collaboration"
-                    className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-xs text-white transition outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    disabled={isLoading}
+                    className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-xs text-white transition outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10 disabled:opacity-50"
                   />
                 </label>
 
@@ -219,16 +329,21 @@ export default function ContactSection() {
                 <label className="space-y-2 text-xs text-neutral-400 uppercase">
                   Message
                   <textarea
+                    name="message"
                     placeholder="Tell me about your project, timeline, and goals ..."
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    disabled={isLoading}
                     rows={6}
-                    className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-xs text-white transition outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10"
+                    className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-xs text-white transition outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10 disabled:opacity-50"
                   />
                 </label>
 
                 <div className="flex flex-col gap-3 pt-5 sm:flex-row sm:items-center sm:justify-between">
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-white/10 px-6 py-3 text-sm font-semibold text-white uppercase transition hover:bg-white/15"
+                    disabled={isLoading}
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-white/10 px-6 py-3 text-sm font-semibold text-white uppercase transition hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <span className="text-[10px]">
                       <svg
@@ -244,8 +359,39 @@ export default function ContactSection() {
                         />
                       </svg>
                     </span>
-                    Send message
+                    {isLoading ? "Sending..." : "Send message"}
                   </button>
+
+                  {submitStatus === "success" && (
+                    <div className="flex items-center justify-between gap-3 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black shadow-lg shadow-black/10">
+                      <span className="whitespace-nowrap">
+                        ✓ Message sent successfully!
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setSubmitStatus("idle")}
+                        className="text-black/50 hover:text-black"
+                        aria-label="Dismiss"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  )}
+                  {submitStatus === "error" && (
+                    <div className="flex items-center justify-between gap-3 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black shadow-lg shadow-black/10">
+                      <span className="whitespace-nowrap">
+                        ✕ Error sending message. Please try again.
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setSubmitStatus("idle")}
+                        className="text-black/50 hover:text-black"
+                        aria-label="Dismiss"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  )}
                 </div>
               </form>
             </div>

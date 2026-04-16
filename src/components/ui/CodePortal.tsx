@@ -9,18 +9,26 @@ export default function CodePortal() {
     { number: "01", code: "const Fullstack Developer = {" },
     {
       number: "02",
-      code: "  frontend: 'TypeScript, React, Next.js , Tailwind CSS, Redux Toolkit, RTK Query',",
+      code: "  frontend: 'TypeScript, React, Next.js,",
     },
-    { number: "03", code: "  backend: 'Node.js, NestJS, RESTful APIs'," },
     {
-      number: "04",
+      number: "03",
+      code: "    Tailwind CSS, Redux Toolkit, RTK Query',",
+    },
+    { number: "04", code: "  backend: 'Node.js, NestJS, RESTful APIs'," },
+    {
+      number: "05",
       code: "  database: 'MySQL, PostgreSQL, MongoDB',",
     },
     {
-      number: "05",
-      code: "  workflow: 'Git, GitLab CI/CD, Docker, Figma, Jira, Postman, Agile/Scrum, ArgoCD',",
+      number: "06",
+      code: "  workflow: 'Git, GitLab CI/CD, Docker, Figma,",
     },
-    { number: "06", code: "};" },
+    {
+      number: "07",
+      code: "    Jira, Postman, Agile/Scrum, ArgoCD',",
+    },
+    { number: "08", code: "};" },
   ];
 
   const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
@@ -84,7 +92,7 @@ export default function CodePortal() {
                   <span className="min-w-8 text-right text-neutral-500">
                     {line.number}
                   </span>
-                  <span className="wrap-break-word whitespace-pre-wrap text-neutral-200">
+                  <span className="break-words whitespace-pre-wrap text-neutral-200">
                     {line.code}
                   </span>
                 </div>
