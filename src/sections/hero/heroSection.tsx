@@ -41,9 +41,7 @@ export default function HeroSection() {
           </div>
 
           <div ref={portalRef}>
-            <div className="hidden lg:block">
-              <CodePortal />
-            </div>
+            <CodePortal />
           </div>
         </div>
       </div>
