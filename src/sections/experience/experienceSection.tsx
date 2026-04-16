@@ -161,7 +161,7 @@ export default function ExperienceSection() {
           </p>
         </div>
 
-        <div className="relative mt-20 px-4 sm:px-0">
+        <div className="relative mt-20">
           <div className="absolute top-0 left-1/2 hidden h-full w-px -translate-x-1/2 bg-white/10 md:block" />
 
           <div className="space-y-10">
@@ -202,16 +202,16 @@ export default function ExperienceSection() {
                         className="w-full cursor-pointer text-left"
                         aria-expanded={isOpen}
                       >
-                        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                          <div className="flex items-center gap-4">
-                            <div className="flex h-14 w-14 items-center justify-center rounded-lg border border-white/10 bg-black/20 p-3">
+                        <div className="flex flex-row flex-wrap items-center justify-center gap-4 md:justify-between">
+                          <div className="flex min-w-0 items-center gap-4">
+                            <div className="relative h-14 w-14 overflow-hidden rounded-lg border border-white/10 bg-black/20 p-3">
                               {experience.logo ? (
                                 <Image
                                   src={experience.logo}
                                   alt={`${experience.company} logo`}
-                                  width={48}
-                                  height={48}
-                                  className="h-full w-full object-contain"
+                                  fill
+                                  sizes="56px"
+                                  className="object-contain"
                                 />
                               ) : (
                                 <span className="text-sm font-semibold text-white">
@@ -223,14 +223,14 @@ export default function ExperienceSection() {
                                 </span>
                               )}
                             </div>
-                            <div>
-                              <p className="text-xs text-neutral-400 uppercase">
+                            <div className="min-w-0 flex-1">
+                              <p className="text-[11px] text-neutral-400 uppercase sm:text-xs">
                                 {experience.title}
                               </p>
-                              <h3 className="text-2xl font-semibold text-white">
+                              <h3 className="text-xl font-semibold text-white sm:text-2xl">
                                 {experience.company}
                               </h3>
-                              <p className="text-sm text-neutral-400">
+                              <p className="text-[13px] text-neutral-400 sm:text-sm">
                                 {experience.location}
                                 {experience.date ? ` • ${experience.date}` : ""}
                               </p>

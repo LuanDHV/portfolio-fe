@@ -108,7 +108,7 @@ export default function ExperienceSection() {
           </p>
         </div>
 
-        <div className="relative mt-20 px-4 sm:px-0">
+        <div className="relative mt-20">
           <div className="absolute top-0 left-1/2 hidden h-full w-px -translate-x-1/2 bg-white/10 md:block" />
 
           <div className="space-y-10">
