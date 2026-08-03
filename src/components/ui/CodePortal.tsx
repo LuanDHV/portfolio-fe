@@ -6,29 +6,56 @@ export default function CodePortal() {
   const portalRef = useRef<HTMLDivElement | null>(null);
 
   const lines = [
-    { number: "01", code: "const Fullstack Developer = {" },
+    { number: "01", code: "const TechnicalSkills = {" },
     {
       number: "02",
-      code: "  frontend: 'TypeScript, React, Next.js,",
+      code: "  frontend: 'TypeScript, React,",
     },
     {
       number: "03",
-      code: "    Tailwind CSS, Redux Toolkit, RTK Query',",
+      code: "    Next.js SSR/SSG, Tailwind CSS,",
     },
-    { number: "04", code: "  backend: 'Node.js, NestJS, RESTful APIs'," },
+    {
+      number: "04",
+      code: "    Shadcn, Ant Design, Refine',",
+    },
     {
       number: "05",
-      code: "  database: 'MySQL, PostgreSQL, MongoDB',",
+      code: "  stateData: 'Redux Toolkit, RTK Query,",
     },
     {
       number: "06",
-      code: "  workflow: 'Git, GitLab CI/CD, Docker, Figma,",
+      code: "    TanStack Query, Zustand, Zod',",
     },
     {
       number: "07",
-      code: "    Jira, Postman, Agile/Scrum, ArgoCD',",
+      code: "  apiData: 'REST APIs, Swagger',",
     },
-    { number: "08", code: "};" },
+    {
+      number: "08",
+      code: "  backend: 'Node.js, NestJS, Python, Prisma ORM',",
+    },
+    {
+      number: "09",
+      code: "  database: 'MySQL, PostgreSQL, MongoDB',",
+    },
+    {
+      number: "10",
+      code: "  devops: 'Git, Docker, GitHub Actions,",
+    },
+    {
+      number: "11",
+      code: "    GitLab CI/CD, ArgoCD, Coolify, GHCR',",
+    },
+    {
+      number: "12",
+      code: "  tools: 'Jest, Playwright, Postman, GA4/GTM',",
+    },
+    {
+      number: "13",
+      code: "  workflow: 'Figma, Jira, Agile/Scrum',",
+    },
+    { number: "14", code: "};" },
   ];
 
   const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {

@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 const heroDescription =
-  "Experienced in building modern web applications with a strong focus on performance, accessibility, and polished user experiences. Interested in working across frontend and backend layers to deliver solutions that scale. Seeking opportunities.";
+  "Fullstack Developer with 1 year of experience in building SEO-focused Next.js applications, admin systems, analytics pipelines, and scalable backend services. Strong expertise across modern state management patterns, end-to-end data validation, automated CI/CD pipelines, and self-managed cloud deployments.";
 
 export default function HeroDetails() {
   const descriptionRef = useRef<HTMLParagraphElement | null>(null);
@@ -77,7 +77,7 @@ export default function HeroDetails() {
           Let&apos;s Collaborate
         </button>
         <a
-          href="/resume/LuanDHV-Resume.pdf"
+          href="/resume/LuanDHV-Resume-Fullstack.pdf"
           download
           className="inline-flex cursor-pointer items-center justify-center rounded-lg border border-white/10 bg-neutral-950/80 px-6 py-3 text-sm font-semibold text-neutral-200 transition hover:bg-neutral-900"
         >

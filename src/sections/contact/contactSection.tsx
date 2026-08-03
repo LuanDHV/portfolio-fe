@@ -165,9 +165,9 @@ export default function ContactSection() {
                 Let&apos;s build something together.
               </h2>
               <p className="text-lg leading-8 text-neutral-300">
-                I&apos;m open to new challenges across web development, product
-                delivery, and technical collaboration. If you have a project,
-                idea, or opportunity to discuss, I&apos;d love to hear from you.
+                I&apos;m open to fullstack product work, frontend-heavy roles,
+                and technical collaboration. If you have a project, product
+                idea, or opportunity to discuss, I&apos;d be glad to connect.
               </p>
             </div>
 

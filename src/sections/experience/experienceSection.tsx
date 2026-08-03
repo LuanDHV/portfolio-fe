@@ -5,76 +5,99 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const experiences = [
+type ExperienceDetail =
+  | {
+      type: "section";
+      title: string;
+    }
+  | {
+      type: "item";
+      content: string;
+    };
+
+type Experience = {
+  id: string;
+  title: string;
+  company: string;
+  logo?: string;
+  location: string;
+  date: string;
+  details: ExperienceDetail[];
+};
+
+const experiences: Experience[] = [
+  {
+    id: "a-connection",
+    title: "Fullstack Developer",
+    logo: "/logos/aconnection-logo.webp",
+    company: "A-connection Group",
+    location: "Ho Chi Minh, Vietnam",
+    date: "Apr 2026 - Present",
+    details: [
+      {
+        type: "item",
+        content:
+          "Rebuilt a 10+ year legacy PHP website as the sole developer into a modern commercial property marketplace, architecting a multi-app system with Next.js SSR, NestJS API, Refine CMS, and a shared contracts package.",
+      },
+      {
+        type: "item",
+        content:
+          "Achieved near-perfect Google Lighthouse scores (99 Performance, 100 SEO) by migrating to Next.js SSR and integrating Cloudinary CDN, eliminating image load latencies.",
+      },
+      {
+        type: "item",
+        content:
+          "Drove an 88% boost in web traffic within the first 30 days of deployment, increasing monthly pageviews from 5,000+ to 10,000+ through optimized server-side rendering, Zustand, and TanStack Query state management.",
+      },
+      {
+        type: "item",
+        content:
+          "Engineered a new production database from scratch, capturing 1,300+ property listings, 200+ tenant requests, and active user registrations within 1 month post-launch while enforcing validation with Zod.",
+      },
+      {
+        type: "item",
+        content:
+          "Implemented core marketplace workflows for listing moderation, tenant-landlord matching, live search, Excel exports, and an operations dashboard integrating GA4/GTM analytics with internal DB tracking.",
+      },
+      {
+        type: "item",
+        content:
+          "Deployed Dockerized services across dev, staging, and production on a self-managed VPS using GitHub Actions, GHCR, and Coolify, with daily automated DB backups and health checks.",
+      },
+    ],
+  },
   {
     id: "enjoysport",
-    title: "Frontend Developer (Fullstack Contribution)",
+    title: "Fullstack Developer",
     company: "EnjoySport",
     logo: "/logos/enjoysport-logo.svg",
-    location: "Ho Chi Minh, Viet Nam",
+    location: "Ho Chi Minh, Vietnam",
     date: "Jun 2025 - Feb 2026",
     details: [
       {
-        type: "section",
-        title: "Core Product Development",
+        type: "item",
+        content:
+          "Developed and maintained high-traffic Next.js SSR products for sports content, live events, and internal operations, leveraging Redux Toolkit and RTK Query for global state and data synchronization.",
       },
       {
         type: "item",
         content:
-          "Developed and maintained multiple high-traffic Next.js (SSR) products, focusing on performance, SEO, and user experience.",
+          "Built SEO-optimized pages and map-based visualizations for nationwide events and race timelines.",
       },
       {
         type: "item",
         content:
-          "Owned frontend development for a sports content platform, creating SEO-optimized pages and map-based visualizations to help users explore nationwide events and race timelines.",
+          "Improved livestream admin systems by enhancing UI/UX, integrating real-time data services, and implementing GA4 tracking.",
       },
       {
         type: "item",
         content:
-          "Improved internal admin systems for livestream operations by enhancing UI/UX and integrating real-time data services.",
+          "Developed a high-concurrency Zalo Mini App for the Amazfit photobooth at Techcombank HCMC International Marathon 2025 (23,000+ participants), ensuring instant, zero-downtime photo access during peak finishes.",
       },
       {
         type: "item",
         content:
-          "Implemented GA4 tracking across key platforms to improve analytics and user behavior insights.",
-      },
-      {
-        type: "section",
-        title: "SFOLIO — Athlete Ranking Platform",
-      },
-      {
-        type: "item",
-        content:
-          "Independently designed and developed a fullstack athlete ranking platform with crawling, normalization, and ranking calculation pipelines for competition data.",
-      },
-      {
-        type: "item",
-        content:
-          "Built backend services using NestJS and admin tools for managing events, athletes, and results.",
-      },
-      {
-        type: "item",
-        content:
-          "Optimized performance with caching strategies, reducing database load and improving response time for a production system handling 500,000+ records and 15,000+ athlete profiles.",
-      },
-      {
-        type: "section",
-        title: "Additional Contributions",
-      },
-      {
-        type: "item",
-        content:
-          "Supported live operations for large-scale sports events with a focus on livestream system execution.",
-      },
-      {
-        type: "item",
-        content:
-          "Developed a Zalo Mini App for an Amazfit photobooth at the Techcombank HCMC International Marathon 2025, enabling participants to capture and instantly access photos on-site.",
-      },
-      {
-        type: "item",
-        content:
-          "Contributed frontend development to partner platforms across the Vietnam sports ecosystem.",
+          "Independently built a fullstack athlete ranking platform handling 500,000+ records and 15,000+ athlete profiles with NestJS, custom data crawling and normalization pipelines, Redis caching, and admin tools.",
       },
     ],
   },
@@ -151,13 +174,12 @@ export default function ExperienceSection() {
             Work Experience
           </span>
           <h2 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-            Professional experience in fullstack and user-focused systems.
+            One year of production fullstack work across marketplace and sports platforms.
           </h2>
           <p className="text-lg leading-8 text-neutral-300">
-            I work on scalable frontend and backend systems with a focus on
-            performance, maintainability, and practical delivery. The work
-            includes production-oriented applications, admin tools, and live
-            operations support.
+            My experience spans SEO-focused Next.js systems, analytics
+            pipelines, scalable backend services, and cloud deployment
+            workflows for live production teams.
           </p>
         </div>
 

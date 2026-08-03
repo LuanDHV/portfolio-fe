@@ -8,35 +8,37 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const projects = [
   {
     name: "ParaVibe",
-    role: "Personalized music recommendation website",
+    role: "AI music recommendation platform",
     date: "Nov 2025 - Feb 2026",
     github: "https://github.com/LuanDHV/graduation-project",
     demo: "https://youtu.be/i4YZZiMbL00?si=weIWWeVhxhu1u-dn",
     image: "/imgs/paravibe.jpg",
     summary:
-      "Fullstack music streaming platform with AI-based recommendations using audio and metadata embeddings (MERT, SBERT).",
-    tags: ["Next.js", "NestJS", "FastAPI", "Python", "MySQL", "Docker"],
+      "Fullstack music streaming platform with AI-based recommendation using MERT/SBERT audio and metadata embeddings for real-time similarity search.",
+    tags: [
+      "Next.js",
+      "NestJS",
+      "FastAPI",
+      "Python",
+      "MySQL",
+      "Docker",
+      "MERT",
+      "SBERT",
+    ],
   },
   {
-    name: "Riot Games Clone",
+    name: "Riot Games Platform Recreation",
     role: "Fullstack web application",
     date: "Oct 2024 - May 2025",
     github: "https://github.com/LuanDHV/Riot-Games",
     demo: "https://youtu.be/7Vibs2z5HA4?si=TZHHwsGhI9F3Xt9_",
     image: "/imgs/riot.jpg",
     summary:
-      "Replica of Riot Games platform with multi-game pages, responsive UI, and immersive product flows.",
-    tags: [
-      "TypeScript",
-      "Tailwind CSS",
-      "Next.js",
-      "NestJS",
-      "Prisma",
-      "PostgreSQL",
-    ],
+      "Fullstack web application recreating a multi-game publishing platform with responsive pages and backend-managed content.",
+    tags: ["TypeScript", "Next.js", "NestJS", "RTK Query", "PostgreSQL"],
   },
   {
-    name: "E-Learning Prep Clone",
+    name: "E-Learning Prep Platform",
     role: "Language learning platform",
     date: "Jun 2024 - Sep 2024",
     github: "https://github.com/LuanDHV/Prep-Clone-NextTS",
@@ -113,11 +115,11 @@ export default function ProjectsSection() {
             Projects
           </span>
           <h2 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-            Personal projects and technical prototypes.
+            Selected projects across product, platform, and AI exploration.
           </h2>
           <p className="text-lg leading-8 text-neutral-300">
-            A collection of self-driven work built to showcase product thinking,
-            engineering skills, and experimentation with modern web stacks.
+            A focused set of personal builds that show fullstack execution,
+            product thinking, and experimentation with recommendation systems.
           </p>
         </div>
 
@@ -181,7 +183,7 @@ export default function ProjectsSection() {
                             fill
                             sizes="(min-width: 1024px) 520px, 100vw"
                             loading={
-                              project.name === "E-Learning Prep Clone"
+                              project.name === "E-Learning Prep Platform"
                                 ? "eager"
                                 : "lazy"
                             }
